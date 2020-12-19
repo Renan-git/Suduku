@@ -61,14 +61,14 @@ void searchx(int *mapa,int v[],int tam)
 int aux;
 for(aux=0;aux<tam;aux++)
 	if(mapa[aux])	
-		v[mapa[aux]-1]=mapa[aux];
+		v[mapa[aux]-1]=1;
 }
 void searchy(int **mapa,int v[],int tam,int j)
 {
 int aux;
 for(aux=0;aux<tam;aux++)
 	if(mapa[aux][j])	
-		v[mapa[aux][j]-1]=mapa[aux][j];
+		v[mapa[aux][j]-1]=1;
 }
 void searchz(int **mapa,int v[],int tam,int i,int j)
 {
@@ -78,35 +78,40 @@ for(aux1=0;aux1<3;aux1++)
 {	for(aux2=0;aux2<3;aux2++)
 	{
 		if(mapa[x][y])
-			v[mapa[x][y]-1]=mapa[x][y];
+			v[mapa[x][y]-1]=1;
 		x++;aux++;
 	}y++;x=(i/3)*3;
 }
 }
+
+int result (int x[],int y[],int z[],int r[],int tam)
+{
+int i;
+for(i=0;i<tam;i++)
+	if (!(x[i] || y[i] || z[i]))
+		r[i]=1;
+
+return 0;
+}
+
 int Search(int **mapa,int i,int j)
 {
-int x[TAM],y[TAM],z[TAM],a;
+int x[TAM],y[TAM],z[TAM],r[TAM],aux,p=0;
 
-zeravetor(x,TAM);zeravetor(y,TAM);zeravetor(z,TAM);
+zeravetor(x,TAM);zeravetor(y,TAM);zeravetor(z,TAM);zeravetor(r,TAM);
 
 searchx(mapa[i],x,TAM);
 searchy(mapa,y,TAM,j);
 searchz(mapa,z,TAM,i,j);
 
-/*printf("X=");
-	for(a=0;a<9;a++)
-		printf("[%d]",x[a]);
+result(x,y,z,r,TAM);
 
+p=r[0]+r[1]+r[2]+r[3]+r[4]+r[5]+r[6]+r[7]+r[8];
 
+if(p==1)
+	for(aux=0;aux<TAM;aux++)
+		if(r[aux])
+		mapa[i][j]=(aux+1);
 
-printf("Y=");
-	for(a=0;a<9;a++)
-		printf("[%d]",y[a]);
-
-
-printf("Z=");
-	for(a=0;a<9;a++)
-		printf("[%d]",z[a]);
-*/
 return 0;
 }
