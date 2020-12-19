@@ -13,6 +13,7 @@ void zeravetor(int v[],int tam);
 void searchx(int *mapa,int v[],int tam);
 void searchy(int **mapa,int v[],int tam,int j);
 void searchz(int **mapa,int v[],int tam,int i,int j);
+int result (int x[],int y[],int z[],int r[],int tam);
 
 
 #endif  /*FILE_H*/
